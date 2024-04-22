@@ -13,6 +13,8 @@ const eulersNumber = 2.7183
 const totalAmountAfterInterest 
     = principalAmount * eulersNumber ** (APYAsDecimalPercentage * timeInYears)
 
+// console.log(totalAmountAfterInterest)
+
 // The source code MUST return a Buffer or the request will return an error message
 // Use one of the following functions to convert to a Buffer representing the response bytes that are returned to the consumer smart contract:
 // - Functions.encodeUint256

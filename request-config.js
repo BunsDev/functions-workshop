@@ -13,8 +13,7 @@ const requestConfig = {
     
     // source code to be executed (todo: update)
     // source: fs.readFileSync("./calculation-example.js").toString(),
-    // source: fs.readFileSync("./api-request.js").toString(),
-    source: fs.readFileSync("./api-request.js").toString(),
+    source: fs.readFileSync("./ai-request.js").toString(),
 
     // (optional) accessed within the source code with `secrets.varName` (ie: secrets.apiKey). The secrets object can only contain string values.
     secrets: { 
@@ -26,7 +25,9 @@ const requestConfig = {
         "bitcoin",          // tokenId
         "d1",               // interval
         "forecastMethod",   // forecast_method
-        // "",              // AI prompt
+        "",              // AI prompt
+        "1000000",          // principalAmount
+        "450"               // APYTimes100
     ],
 
     // code language (JavaScript only)
