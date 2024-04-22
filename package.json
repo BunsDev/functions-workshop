@@ -4,5 +4,17 @@
   "main": "index.js",
   "repository": "https://github.com/BunsDev/block-magic-functions-workshop.git",
   "author": "Buns Enchantress <bunsthedev@gmail.com>",
-  "license": "MIT"
+  "license": "MIT",
+  "scripts": {
+    "set:pw": "npx env-enc set-pw",
+    "set:env": "npx env-enc set",
+    "build": "forge build",
+    "test": "forge test -vv",
+    "simulate": "node scripts/Simulate.js"
+  },
+  "dependencies": {
+    "@chainlink/env-enc": "^1.0.5",
+    "@chainlink/functions-toolkit": "^0.2.8",
+    "openai": "^4.38.3"
+  }
 }

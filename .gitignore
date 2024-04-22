@@ -1,3 +1,14 @@
 # Environment Variables
 .env
 .env.local
+.env.enc
+
+# Forge
+out
+cache
+
+# Dependency Directories
+node_modules/
+
+# Misc.
+.DS_Store
