@@ -1,1 +1,1 @@
-# block-magic-functions-workshop
+# Block Magic Functions Workshop
