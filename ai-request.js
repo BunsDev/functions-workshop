@@ -1,109 +1,99 @@
 // [0] SETUP AND VALIDITY CHECKS //
-const API_KEY_REQUIRED = true
-
 const apiKey = secrets.apiKey
 
 // if: API KEY is required and not set, throw an error.
-if (API_KEY_REQUIRED && (
-    apiKey == "" ||
-    apiKey === "API Key."
-)) {
+if (apiKey == "" || apiKey == undefined || apiKey == null || apiKey == "undefined" || apiKey == "null" || apiKey == "API_KEY")
+{
     throw Error(
-        "API_KEY environment variable not set for the API."
+        "OPENAI_KEY environment variable not set for the API."
     )
 }
 
-// (1) ARGUMENT DECLARATION //
+// [1] ARGUMENT DECLARATION //
 
 // gets: tokenId passed to the request (`tokenId`)
-const tokenId = 'bitcoin' // args[0]
+const tokenId = args[0]
+
 // gets: interval passed to the request (`interval`)
-const interval = 'd1' // args[1]
+const interval = args[1]
 
 // gets: forecastMethod passed to the request (`forecastMethod`)
-// const forecastMethod = args[2]
+const forecastMethod = args[2]
+
+// gets: promptEngineering passed to the request (`promptEngineering`)
+const historicalDays = Number(args[3])
 
 
 // [2] REQUEST CREATION //
 
-// uses: the Functions.makeHttpRequest function to construct an HTTP request.
-
-const coinCapRequest = Functions.makeHttpRequest({
+// uses: Functions to construct an HTTP request.
+const priceRequest = await Functions.makeHttpRequest({
     url: `https://api.coincap.io/v2/assets/${tokenId}/history?interval=${interval}`,
 })
 
-// executes: API requests concurrently, then wait for the responses.
-const coinCapResponse = await coinCapRequest
+// executes: request, then waits for the sorted response.
+const priceResponse = await priceRequest.data.data.sort(
+    // sorts by: time in descending order.
+    function(a, b) {
+        return b.time - a.time
+    }
+)
 
 // [3] RESPONSE HANDLING //
+const prices = []
 
-let historicalDays = 5
-
-let _prices = [
-    //     {
-    //     "priceUsd": "28305.9784040535584856",
-    //     "time": 1682985600000,
-    //     "date": "2023-05-02T00:00:00.000Z"
-    // }
-]
-
-for (let i=0; i<coinCapResponse.data.data.length; i++) {
-    _prices.push(coinCapResponse.data.data[i].priceUsd)
+for (let i=0; i<historicalDays; i++) {
+        prices.push(priceResponse[i].priceUsd)
 }
+    
+// [4] PROMPT ENGINEERING //
+const prompt = 
+`Historical Data: ${prices}. Based off the historical data, use a ${forecastMethod} forecast to predict the price at the next timestamp in the time series.
+No explanation. Only report a float number with no dollar sign and no context.`
 
-const _totalPrices = _prices.length
-
-console.log('_prices:', _prices)
-console.log('_totalPrices:', _totalPrices)
-
-const prices = _prices.slice(_totalPrices-historicalDays)
-
-console.log('prices:', prices)
-
-const stringifiedPrices = JSON.stringify(prices)
-console.log('stringifiedPrices:', stringifiedPrices)
-
-const prompt = `Historical Data: ${stringifiedPrices}. Based off the historical data, predict the price at the next timestamp in the time series.
-                No explanation. Only report an float number with no dollar sign and no additional context.`
-
-// Functions.makeHttpRequest function parameters:
-    // - url
-    // - method (optional, defaults to 'GET')
-    // - headers: headers supplied as an object (optional)
-    // - params: URL query parameters supplied as an object (optional)
-    // - data: request body supplied as an object (optional)
-    // - timeout: maximum request duration in ms (optional, defaults to 10000ms)
-    // - responseType: expected response type (optional, defaults to 'json')
-
+// [5] AI DATA REQUEST //
 
 // requests: OpenAI API using Functions
-const openAIRequest = Functions.makeHttpRequest({
-    // url: "https://api.openai.com/v1/engines/davinci/completions",
-    url: `https://api.openai.com/v1/completions`,
-    method: "POST",
-    headers: {
-        // "Content-Type": "application/json",
+const openAIRequest = await Functions.makeHttpRequest({
+    // url: URL of the API endpoint (required)
+    url: `https://api.openai.com/v1/chat/completions`,
+    // defaults to 'GET' (optional)
+    method: "POST", 
+    // headers: supplied as an object (optional)
+    headers: { 
+    "Content-Type": "application/json",
         "Authorization": `Bearer ${apiKey}`
     },
-    // defines: data payload.
-    data: {
-        "model": "gpt-3.5-turbo",       // specify the model you want to use
-        "prompt": prompt,
-        "temperature": 0.8,             // 0.0 (conservative) - 1.0 (creative)
-        "max_tokens": 25,                // limits: spend amount
-    },
-    // responseType: "json"
+    // defines: data payload (request body as an object).
+    data: { 
+        "model": "gpt-3.5-turbo",
+        "messages": [
+        {
+            "role": "system",
+            "content": "You are forecasting the price of a token."
+        },
+        {
+            "role": "user",
+            "content": prompt
+        }
+    ]},
+    // timeout: maximum request duration in ms (optional, defaults to 10000ms)
+    timeout: 10_000,
+    maxTokens: 100,
+    // responseType: expected response type (optional, defaults to 'json')
+    responseType: "json",
+    // params: URL query parameters supplied as an object (optional)
+    params: {}
 })
 
 const response = await openAIRequest
 
-// ERROR: returns "Bad Request" (status: 400)
-console.log("raw response", response)
-console.log("raw response data", response.data)
-
-let result = response.data?.data
-
-// The source code MUST return a Buffer or the request will return an error message.
+// finds: the response and returns the result.
+let result = response.data?.choices[0].message.content
+console.log(`${forecastMethod} forecast: %s`, response.data?.choices[0].message.content)
+console.log(`${forecastMethod} forecast: %s`, response.data?.choices[0].message.content)
+// 63062.76387686369
+// Note: source code MUST return a Buffer or the request will return an error message.
 
 // Use one of the following functions to convert to a Buffer representing the response bytes that are returned to the consumer smart contract:
 // - Functions.encodeUint256

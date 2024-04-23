@@ -8,7 +8,6 @@ const requestConfig = {
     codeLocation: Location.Inline,
     
     // (optional) if secrets are expected in the sourceLocation of secrets (only Remote or DONHosted is supported)
-    // secretsLocation: Location.Inline,
     secretsLocation: Location.DONHosted,
     
     // source code to be executed (todo: update)
@@ -22,12 +21,12 @@ const requestConfig = {
 
     // args (array[""]): source code accesses via `args[index]`.
     args: [
-        "bitcoin",          // tokenId
-        "d1",               // interval
-        "forecastMethod",   // forecast_method
-        "",              // AI prompt
-        "1000000",          // principalAmount
-        "450"               // APYTimes100
+        "bitcoin",          // tokenId          [0]
+        "d1",               // interval         [1]
+        "naive",            // forecastMethod   [2]
+        "7",                // historicalDays   [3]
+        "1000000",          // principalAmount  [4]
+        "450"               // APYTimes100      [5]
     ],
 
     // code language (JavaScript only)
