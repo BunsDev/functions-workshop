@@ -1,66 +1,50 @@
-## Foundry
+# Block Magic Functions Workshop
+In this workshop, we will build a price forecast to help inform the direction of a trade transaction.
 
-**Foundry is a blazing fast, portable and modular toolkit for Ethereum application development written in Rust.**
+## Getting Started
+- [Install Foundry and Rust](/docs/INSTALL.md)
+- [Foundry Guide](/docs/FOUNDRY.md)
 
-Foundry consists of:
+## Overview of Functions
+Chainlink functions enables you to leverage the power of a decentralized oracle network (DON) to execute external function calls (off-chain) to inform on-chain interactions.
 
--   **Forge**: Ethereum testing framework (like Truffle, Hardhat and DappTools).
--   **Cast**: Swiss army knife for interacting with EVM smart contracts, sending transactions and getting chain data.
--   **Anvil**: Local Ethereum node, akin to Ganache, Hardhat Network.
--   **Chisel**: Fast, utilitarian, and verbose solidity REPL.
+Chainlink is able to execute a user-defined function via a DON, which comes to consensus on the results and reports the median result to the requesting contract via a callback function.
 
-## Documentation
+---
 
-https://book.getfoundry.sh/
 
-## Usage
+## Functions Workflow
 
-### Build
+### 1. Setup Environment Variables
 
-```shell
-$ forge build
+#### Create Password
+Chainlink Functions enables you to securely share secrets with the DON. Secrets are encrypted with a password.
 ```
-
-### Test
-
-```shell
-$ forge test
+yarn set:pw
 ```
+Once the ecrpytion key is created with your desired password, you can safely share your secrets with the DON, which requires multiple nodes to decrypt with consensus.
 
-### Format
+#### Store Variables
 
-```shell
-$ forge fmt
+We may now safely store environment variables without worrying about them being exposed, since they will be encrypted with your desired password. 
+
+These variables will be stored in a file called `.env.enc`.
+
 ```
-
-### Gas Snapshots
-
-```shell
-$ forge snapshot
+yarn set:env
 ```
+After running the command, you'll be prompted to enter the following for each variable to be encrypted:
 
-### Anvil
+- **Name**: used to identify the variable.
 
-```shell
-$ anvil
+- **Value**: your (*unencrypted*) environment variable (*secret*).
+
+
+### 2. Simulate Functions
+Before deploying, it's useful to simulate the execution of your function to ensure the output of your function execution is as expected.
+
+You may simulate your function using the command below.
+
 ```
-
-### Deploy
-
-```shell
-$ forge script script/Counter.s.sol:CounterScript --rpc-url <your_rpc_url> --private-key <your_private_key>
-```
-
-### Cast
-
-```shell
-$ cast <subcommand>
-```
-
-### Help
-
-```shell
-$ forge --help
-$ anvil --help
-$ cast --help
+yarn simulate
 ```
