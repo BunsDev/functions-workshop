@@ -39,7 +39,10 @@ After running the command, you'll be prompted to enter the following for each va
 
 - **Value**: your (*unencrypted*) environment variable (*secret*).
 
-For this demonstration, you will need to add `OPENAI_KEY` to your encrypted environment variables.
+For this demonstration, you will need to add the following to your encrypted environment variables:
+- `OPENAI_KEY`
+- `PRIVATE_KEY`
+
 
 
 ### 2. Simulate Functions
@@ -63,3 +66,18 @@ yarn deploy
 ### 4. Create Subscription
 Fund a new Functions billing subscription via the [Chainlink Functions UI](https://functions.chain.link/) and add your deployed Consumer Contract as a an authorized consumer to your subscription.
 
+
+### 5. Make Requests
+Functions enable you to make requests via the consumer contract. Before requesting, make sure you have successfully compiled your FunctionConsumer Contract, otherwise the request will fail to process.
+
+You may do this programmatically with: <br/>
+`npx hardhat func-request --network <NETWORK_NAME> --contract <CONSUMER_ADDRESS>  --subid <SUBSCRIPTION_ID>`. 
+
+You will see a confirmation request, so hit `Y` and press enter. 
+
+Once the request is fulfilled the console will show the response (decoded into the relevant return type) from the execution of your custom JS script.
+
+### 6. Make Queries
+You are also able to query the response that was stored in your Functions Consumer contract either through the [Functions UI](https://functions.chain.link/) or programmatically as follows: <br/>
+`npx hardhat func-read --contract <CONSUMER_ADDRESS> --network <NETWORK_NAME>`
+<br/>

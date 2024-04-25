@@ -8,15 +8,38 @@
   "scripts": {
     "set:pw": "npx env-enc set-pw",
     "set:env": "npx env-enc set",
+    "compile": "hardhat compile",
     "build": "forge build",
     "deploy": "forge script scripts/FunctionsConsumer.s.sol:FunctionsConsumerScript --rpc-url https://sepolia.drpc.org --broadcast",
+    "deploy:hh": "npx hardhat func-deploy-client --network ethereumSepolia --verify false",
     "test": "forge test -vv",
-    "simulate": "node scripts/Simulate.js"
+    "simulate": "node scripts/Simulate.js",
+    "subscribe": "npx hardhat func-sub-create --network ethereumSepolia --amount 5 --contract 0x48adead8e90c4b6B0b9b9E1D8f96bA81155D0c2F",
+    "request": "npx hardhat func-request --network ethereumSepolia --contract 0x48adead8e90c4b6B0b9b9E1D8f96bA81155D0c2F --subid 2406",
+    "read": "npx hardhat func-read --contract 0x48adead8e90c4b6B0b9b9E1D8f96bA81155D0c2F --network ethereumSepolia"
   },
   "dependencies": {
     "@chainlink/contracts": "^1.1.0",
     "@chainlink/env-enc": "^1.0.5",
-    "@chainlink/functions-toolkit": "^0.2.8",
-    "openai": "^4.38.3"
+    "@chainlink/functions-toolkit": "^0.2.8"
+  },
+  "devDependencies": {
+    "@nomicfoundation/hardhat-chai-matchers": "^1.0.3",
+    "@nomicfoundation/hardhat-network-helpers": "^1.0.6",
+    "@nomicfoundation/hardhat-toolbox": "^2.0.0",
+    "@nomicfoundation/hardhat-ethers": "^3.0.5",
+    "@nomicfoundation/hardhat-foundry": "^1.1.1",
+    "@nomiclabs/hardhat-ethers": "^2.2.2",
+    "@nomiclabs/hardhat-etherscan": "^3.1.0",
+    "@typechain/ethers-v5": "^10.1.0",
+    "@typechain/hardhat": "^9.1.0",
+    "chai": "^4.3.6",
+    "hardhat": "^2.22.2",
+    "hardhat-contract-sizer": "^2.6.1",
+    "hardhat-gas-reporter": "^2.1.0",
+    "ora": "5.4.1",
+    "solidity-coverage": "^0.8.2",
+    "typechain": "^8.3.2"
   }
+
 }
