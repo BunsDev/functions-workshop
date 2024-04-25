@@ -39,6 +39,8 @@ After running the command, you'll be prompted to enter the following for each va
 
 - **Value**: your (*unencrypted*) environment variable (*secret*).
 
+For this demonstration, you will need to add `OPENAI_KEY` to your encrypted environment variables.
+
 
 ### 2. Simulate Functions
 Before deploying, it's useful to simulate the execution of your function to ensure the output of your function execution is as expected.
@@ -48,3 +50,11 @@ You may simulate your function using the command below.
 ```
 yarn simulate
 ```
+
+### 3. Deploy Consumer
+
+```
+yarn deploy
+```
+
+**Note**: ensure you have updated the deployment script to align with your target blockchain configurations. Also, be sure to update the RPC URL that is specified within the script, which is currently set to the RPC corresponding to Avalanche C-Chain.
