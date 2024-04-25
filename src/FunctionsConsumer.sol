@@ -11,11 +11,25 @@ import { FunctionsRequest } from "lib/chainlink/contracts/src/v0.8/functions/v1_
 contract FunctionsConsumer is FunctionsClient, ConfirmedOwner {
     using FunctionsRequest for FunctionsRequest.Request;
 
-    bytes32 public donId; // DON ID for the Functions DON to which the requests are sent
+    // DON ID for the Functions DON to which the requests are sent
+    bytes32 public donId;
 
-    bytes32 public s_lastRequestId;
-    bytes public s_lastResponse;
-    bytes public s_lastError;
+    //////////////////////////// [D] ////////////////////////////
+
+    // reports: latestForecast response.
+    string public latestForecast;
+
+    // emits: price forecast event.
+    event ForecastedPrice(string latestForecast);
+
+    // emits: OCRResponse event.
+    event OCRResponse(bytes32 indexed requestId, bytes result, bytes err);
+
+    //////////////////////////// [D] ////////////////////////////
+
+    bytes32 public latestRequestId;
+    bytes public latestResponse;
+    bytes public latestError;
 
     constructor(
         address router,
@@ -42,6 +56,7 @@ contract FunctionsConsumer is FunctionsClient, ConfirmedOwner {
      * @param subscriptionId Subscription ID used to pay for request (FunctionsConsumer contract address must first be added to the subscription)
      * @param callbackGasLimit Maximum amount of gas used to call the inherited `handleOracleFulfillment` method
      */
+
     function sendRequest(
         string calldata source,
         FunctionsRequest.Location secretsLocation,
@@ -65,7 +80,7 @@ contract FunctionsConsumer is FunctionsClient, ConfirmedOwner {
         if (bytesArgs.length > 0) {
             req.setBytesArgs(bytesArgs);
         }
-        s_lastRequestId = _sendRequest(
+        latestRequestId = _sendRequest(
             req.encodeCBOR(),
             subscriptionId,
             callbackGasLimit,
@@ -80,14 +95,30 @@ contract FunctionsConsumer is FunctionsClient, ConfirmedOwner {
      * @param err Aggregated error from the user code or from the execution pipeline
      * Either response or error parameter will be set, but never both
      */
+
     function fulfillRequest(
         bytes32 requestId,
         bytes memory response,
         bytes memory err
     ) internal override {
-        s_lastResponse = response;
-        s_lastError = err;
-        // silences: warning.
-        requestId;
+        latestResponse = response;
+        latestError = err;
+
+        //////////////////////////// [D] ////////////////////////////
+
+        // updates: latest request id.
+        latestRequestId = requestId;
+        
+        // emits: OCRResponse event.
+        emit OCRResponse(requestId, response, err);
+
+        // converts: latest response to a (human-readable) string.
+        latestForecast = string(abi.encodePacked(response));
+        emit ForecastedPrice(latestForecast);
+
+        //////////////////////////// [D] ////////////////////////////
     }
+
+
+
 }

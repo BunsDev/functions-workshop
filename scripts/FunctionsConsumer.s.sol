@@ -12,13 +12,12 @@ contract FunctionsConsumerScript is Script {
 
         // REFER TO DOCS FOR UP-TO-DATE ADDRESSES
         // https://docs.chain.link/chainlink-functions/supported-networks
-
-        address ROUTER_ADDRESS_AVAX = 0x9f82a6A0758517FD0AfA463820F586999AF314a0;
-        bytes32 DON_ID_AVAX = 0x66756e2d6176616c616e6368652d6d61696e6e65742d31000000000000000000;
+        address ROUTER_ADDRESS = 0xb83E47C2bC239B3bf370bc41e1459A34b41238D0;                       // ETH SEPOLIA
+        bytes32 DON_ID = 0x66756e2d657468657265756d2d7365706f6c69612d3100000000000000000000;       // ETH SEPOLIA
 
         FunctionsConsumer functionsConsumer = new FunctionsConsumer(
-            ROUTER_ADDRESS_AVAX,    // address router,
-            DON_ID_AVAX             // bytes32 _donId
+            ROUTER_ADDRESS,     // address router,
+            DON_ID              // bytes32 _donId
         );
 
         // silences warning.
