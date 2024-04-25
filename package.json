@@ -13,6 +13,7 @@
     "simulate": "node scripts/Simulate.js"
   },
   "dependencies": {
+    "@chainlink/contracts": "^1.1.0",
     "@chainlink/env-enc": "^1.0.5",
     "@chainlink/functions-toolkit": "^0.2.8",
     "openai": "^4.38.3"
