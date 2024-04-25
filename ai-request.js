@@ -101,7 +101,8 @@ const stringResult = response.data?.choices[0].message.content
 console.log(stringResult)
 
 // note: if your result is a really small price, then update to your desired precision.
-const result = Number(stringResult).toFixed(PRECISION) * 1E18 
+const numericResult = Number(stringResult).toFixed(PRECISION)
+const result = numericResult.toString()
 
 console.log(`${FORECAST_METHOD} price forecast: %s`, stringResult)
 
@@ -110,8 +111,7 @@ console.log(`${FORECAST_METHOD} price forecast: %s`, stringResult)
 // console.log("Keys in Response Obj : ", Object.keys(response), "\n\n")
 // console.log(" response.response : ", JSON.stringify(response.data?.choices[0].message.content))
 
-// return Functions.encodeString(result || "Failed")
-return Functions.encodeUint256(result || 0)
+return Functions.encodeString(result || "Failed")
 
 // Note (on Response): source code MUST return a Buffer or the request will return an error message.
 // Use one of the following functions to convert to a Buffer representing the response bytes that are returned to the consumer smart contract:

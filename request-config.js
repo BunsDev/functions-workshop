@@ -34,7 +34,7 @@ const requestConfig = {
     codeLanguage: CodeLanguage.JavaScript,
 
     // shows: expected type of the returned value.
-    expectedReturnType: ReturnType.uint256,
+    expectedReturnType: ReturnType.string,
 }
 
 module.exports = requestConfig

@@ -9,7 +9,7 @@
     "set:pw": "npx env-enc set-pw",
     "set:env": "npx env-enc set",
     "build": "forge build",
-    "deploy": "forge script scripts/FunctionsConsumer.s.sol:FunctionsConsumerScript --rpc-url https://avalanche.drpc.org --broadcast",
+    "deploy": "forge script scripts/FunctionsConsumer.s.sol:FunctionsConsumerScript --rpc-url https://sepolia.drpc.org --broadcast",
     "test": "forge test -vv",
     "simulate": "node scripts/Simulate.js"
   },
