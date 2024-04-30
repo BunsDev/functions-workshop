@@ -25,8 +25,6 @@ const requestConfig = {
         "6",                // precision            [2]
         "naive",            // forecast method      [3]
         "30",               // historical days      [4]
-        "1000000",          // principalAmount      [5]
-        "450"               // APYTimes100          [6]
     ],
 
     // code language (JavaScript only)

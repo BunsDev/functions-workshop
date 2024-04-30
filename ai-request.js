@@ -1,19 +1,19 @@
 // [1] ARGUMENT DECLARATION //
 
-// gets: token id passed to the request (`TOKEN_ID`)
-const TOKEN_ID = args[0]
+// gets: token id for requested data.
+const TOKEN_ID = args[0] // --------------> |   bitcoin
 
-// gets: interval passed to the request (`INTERVAL`)
-const INTERVAL = args[1]
+// gets: interval for the request.
+const INTERVAL = args[1] // --------------> |   d1
 
-// gets: precision to include in the result (`PRECISION`)
-const PRECISION = args[2]
+// gets: decimals to include in the result.
+const PRECISION = args[2] // ------------>  |   6
 
-// gets: forecast method passed to the request (`FORECAST_METHOD`)
-const FORECAST_METHOD = args[3]
+// gets: fcst method for the ML model.
+const FORECAST_METHOD = args[3] // -------> |   naive
 
-// gets: number historical days for forecast analysis (`HISTORICAL_DAYS`)
-const HISTORICAL_DAYS = Number(args[4])
+// gets: historical window for data.
+const HISTORICAL_DAYS = args[4] // -------> |   30
 
 // [2] REQUEST PRICES //
 
@@ -36,7 +36,7 @@ const priceResponse = await priceRequest.data.data.sort(
 let prices = []
 
 // gets: historical prices from the response
-for (let i=0; i<HISTORICAL_DAYS; i++) {
+for (let i=0; i<Number(HISTORICAL_DAYS); i++) {
     // then: pushes them into the price array.
         prices.push(priceResponse[i].priceUsd)
 }
