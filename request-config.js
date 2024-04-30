@@ -11,7 +11,6 @@ const requestConfig = {
     secretsLocation: Location.DONHosted,
     
     // source code to be executed
-    // source: fs.readFileSync("./calculation-example.js").toString(),
     source: fs.readFileSync("./ai-request.js").toString(),
 
     // (optional) accessed within the source code with `secrets.varName` (ie: secrets.apiKey), must be a string.

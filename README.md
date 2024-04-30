@@ -12,7 +12,6 @@ Chainlink is able to execute a user-defined function via a DON, which comes to c
 
 ---
 
-
 ## Functions Workflow
 
 ### 1. Setup Environment Variables
