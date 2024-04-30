@@ -18,7 +18,7 @@ const HISTORICAL_DAYS = args[4] // -------> |   30
 // [2] REQUEST PRICES //
 
 // constructs: an HTTP request for prices using Functions.
-const priceRequest = await Functions.makeHttpRequest({
+const priceRequest = await Functions.makeHttpRequest({ 
     // API Docs: https://docs.coincap.io/#ee30bea9-bb6b-469d-958a-d3e35d442d7a
     url: `https://api.coincap.io/v2/assets/${TOKEN_ID}/history?interval=${INTERVAL}`,
 })

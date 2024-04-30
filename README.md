@@ -54,6 +54,8 @@ You may simulate your function using the command below.
 yarn simulate
 ```
 
+For full details on creating HTTP requestion via functions, read our [API Reference Documentation](https://docs.chain.link/chainlink-functions/api-reference/javascript-source).
+
 ### 3. Deploy Consumer
 
 ```
@@ -64,13 +66,17 @@ yarn deploy
 
 ### 4. Create Subscription
 Fund a new Functions billing subscription via the [Chainlink Functions UI](https://functions.chain.link/) and add your deployed Consumer Contract as a an authorized consumer to your subscription OR do so programmatically, as follows: <br />
-`npx hardhat func-sub-create --network ethereumSepolia --amount <LINK_AMOUNT> --contract <CONSUMER_ADDRESS>`
+```
+npx hardhat func-sub-create --network ethereumSepolia --amount <LINK_AMOUNT> --contract <CONSUMER_ADDRESS>
+```
 
 ### 5. Make Requests
 Functions enable you to make requests via the consumer contract. Before requesting, make sure you have successfully compiled your FunctionConsumer Contract, otherwise the request will fail to process.
 
 You may do this programmatically with: <br/>
-`npx hardhat func-request --network <NETWORK_NAME> --contract <CONSUMER_ADDRESS> --subid <SUBSCRIPTION_ID>`. 
+```
+npx hardhat func-request --network <NETWORK_NAME> --contract <CONSUMER_ADDRESS> --subid <SUBSCRIPTION_ID>
+``` 
 
 You will see a confirmation request, so hit `Y` and press enter. 
 
@@ -78,5 +84,6 @@ Once the request is fulfilled the console will show the response (decoded into t
 
 ### 6. Make Queries
 You are also able to query the response that was stored in your Functions Consumer contract either through the [Functions UI](https://functions.chain.link/) or programmatically as follows: <br/>
-`npx hardhat func-read --contract <CONSUMER_ADDRESS> --network <NETWORK_NAME>`
-<br/>
+```
+npx hardhat func-read --contract <CONSUMER_ADDRESS> --network <NETWORK_NAME>
+```
