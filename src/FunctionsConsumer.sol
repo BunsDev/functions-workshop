@@ -119,6 +119,4 @@ contract FunctionsConsumer is FunctionsClient, ConfirmedOwner {
         //////////////////////////// [D] ////////////////////////////
     }
 
-
-
 }
