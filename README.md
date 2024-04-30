@@ -41,6 +41,7 @@ After running the command, you'll be prompted to enter the following for each va
 For this demonstration, you will need to add the following to your encrypted environment variables:
 - `OPENAI_KEY`
 - `PRIVATE_KEY`
+- `ETHERSCAN_API_KEY`
 
 
 
@@ -59,8 +60,7 @@ yarn simulate
 yarn deploy
 ```
 
-**Note**: ensure you have updated the deployment script to align with your target blockchain configurations. Also, be sure to update the RPC URL that is specified within the script, which is currently set to the RPC corresponding to Ethereum Sepolia testnet.
-
+**Note**: ensure you have updated the deployment script to align with your target blockchain configurations.
 
 ### 4. Create Subscription
 Fund a new Functions billing subscription via the [Chainlink Functions UI](https://functions.chain.link/) and add your deployed Consumer Contract as a an authorized consumer to your subscription.

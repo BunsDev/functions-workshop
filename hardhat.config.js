@@ -47,10 +47,9 @@ module.exports = {
   etherscan: {
     apiKey: {
       // ethereum: networks.ethereum.verifyApiKey,
-      ethereumSepolia: networks.ethereumSepolia.verifyApiKey,
       // avalanche: networks.avalanche.verifyApiKey,
       // polygon: networks.polygon.verifyApiKey,
-      // sepolia: networks.ethereumSepolia.verifyApiKey,
+      sepolia: networks.ethereumSepolia.verifyApiKey,
       // polygonMumbai: networks.polygonMumbai.verifyApiKey,
       // avalancheFujiTestnet: networks.avalancheFuji.verifyApiKey,
       // arbitrum: networks.arbitrum.verifyApiKey,

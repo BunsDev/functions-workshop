@@ -8,9 +8,8 @@
   "scripts": {
     "build": "forge build",
     "compile": "hardhat compile",
-    "deploy": "forge script scripts/FunctionsConsumer.s.sol:FunctionsConsumerScript --rpc-url https://sepolia.drpc.org --broadcast",
-    "deploy:hh": "npx hardhat func-deploy-client --network ethereumSepolia --verify false",
-    "read": "npx hardhat func-read --contract 0x48adead8e90c4b6B0b9b9E1D8f96bA81155D0c2F --network ethereumSepolia",
+    "deploy": "npx hardhat func-deploy-consumer --network ethereumSepolia --verify true",
+    "read": "npx hardhat func-read --network ethereumSepolia --contract 0x48adead8e90c4b6B0b9b9E1D8f96bA81155D0c2F ",
     "request": "npx hardhat func-request --network ethereumSepolia --contract 0x48adead8e90c4b6B0b9b9E1D8f96bA81155D0c2F --subid 2406",
     "set:pw": "npx env-enc set-pw",
     "set:env": "npx env-enc set",
