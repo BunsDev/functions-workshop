@@ -1,7 +1,7 @@
 const fs = require("fs")
 const { Location, ReturnType, CodeLanguage } = require("@chainlink/functions-toolkit")
 
-// configures request: via settings  in the fields below
+// configures request: via settings in the fields below
 const requestConfig = {
 
     // source code location (inline only)

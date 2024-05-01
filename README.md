@@ -4,6 +4,7 @@ In this workshop, we will build a price forecast to help inform the direction of
 ## Getting Started
 - [Install Foundry and Rust](/docs/INSTALL.md)
 - [Foundry Guide](/docs/FOUNDRY.md)
+- [OpenAI API Key](https://platform.openai.com/api-keys)
 
 ## Overview of Functions
 Chainlink functions enables you to leverage the power of a decentralized oracle network (DON) to execute external function calls (off-chain) to inform on-chain interactions.
@@ -42,8 +43,6 @@ For this demonstration, you will need to add the following to your encrypted env
 - `OPENAI_KEY`
 - `PRIVATE_KEY`
 - `ETHERSCAN_API_KEY`
-
-
 
 ### 2. Simulate Functions
 Before deploying, it's useful to simulate the execution of your function to ensure the output of your function execution is as expected.
