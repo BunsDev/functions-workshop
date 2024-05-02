@@ -1,7 +1,7 @@
 const fs = require("fs")
 const { Location, ReturnType, CodeLanguage } = require("@chainlink/functions-toolkit")
 
-// configures request: via settings  in the fields below
+// configures request: via settings in the fields below
 const requestConfig = {
 
     // source code location (inline only)
@@ -11,7 +11,6 @@ const requestConfig = {
     secretsLocation: Location.DONHosted,
     
     // source code to be executed
-    // source: fs.readFileSync("./calculation-example.js").toString(),
     source: fs.readFileSync("./ai-request.js").toString(),
 
     // (optional) accessed within the source code with `secrets.varName` (ie: secrets.apiKey), must be a string.
@@ -26,8 +25,6 @@ const requestConfig = {
         "6",                // precision            [2]
         "naive",            // forecast method      [3]
         "30",               // historical days      [4]
-        "1000000",          // principalAmount      [5]
-        "450"               // APYTimes100          [6]
     ],
 
     // code language (JavaScript only)

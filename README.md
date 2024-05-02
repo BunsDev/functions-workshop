@@ -4,6 +4,7 @@ In this workshop, we will build a price forecast to help inform the direction of
 ## Getting Started
 - [Install Foundry and Rust](/docs/INSTALL.md)
 - [Foundry Guide](/docs/FOUNDRY.md)
+- [OpenAI API Key](https://platform.openai.com/api-keys)
 
 ## Overview of Functions
 Chainlink functions enables you to leverage the power of a decentralized oracle network (DON) to execute external function calls (off-chain) to inform on-chain interactions.
@@ -11,7 +12,6 @@ Chainlink functions enables you to leverage the power of a decentralized oracle 
 Chainlink is able to execute a user-defined function via a DON, which comes to consensus on the results and reports the median result to the requesting contract via a callback function.
 
 ---
-
 
 ## Functions Workflow
 
@@ -42,8 +42,7 @@ After running the command, you'll be prompted to enter the following for each va
 For this demonstration, you will need to add the following to your encrypted environment variables:
 - `OPENAI_KEY`
 - `PRIVATE_KEY`
-
-
+- `ETHERSCAN_API_KEY`
 
 ### 2. Simulate Functions
 Before deploying, it's useful to simulate the execution of your function to ensure the output of your function execution is as expected.
@@ -54,24 +53,29 @@ You may simulate your function using the command below.
 yarn simulate
 ```
 
+For full details on creating HTTP requestion via functions, read our [API Reference Documentation](https://docs.chain.link/chainlink-functions/api-reference/javascript-source).
+
 ### 3. Deploy Consumer
 
 ```
 yarn deploy
 ```
 
-**Note**: ensure you have updated the deployment script to align with your target blockchain configurations. Also, be sure to update the RPC URL that is specified within the script, which is currently set to the RPC corresponding to Ethereum Sepolia testnet.
-
+**Note**: ensure you have updated the deployment script to align with your target blockchain configurations.
 
 ### 4. Create Subscription
-Fund a new Functions billing subscription via the [Chainlink Functions UI](https://functions.chain.link/) and add your deployed Consumer Contract as a an authorized consumer to your subscription.
-
+Fund a new Functions billing subscription via the [Chainlink Functions UI](https://functions.chain.link/) and add your deployed Consumer Contract as a an authorized consumer to your subscription OR do so programmatically, as follows: <br />
+```
+npx hardhat func-sub-create --network ethereumSepolia --amount <LINK_AMOUNT> --contract <CONSUMER_ADDRESS>
+```
 
 ### 5. Make Requests
 Functions enable you to make requests via the consumer contract. Before requesting, make sure you have successfully compiled your FunctionConsumer Contract, otherwise the request will fail to process.
 
 You may do this programmatically with: <br/>
-`npx hardhat func-request --network <NETWORK_NAME> --contract <CONSUMER_ADDRESS>  --subid <SUBSCRIPTION_ID>`. 
+```
+npx hardhat func-request --network <NETWORK_NAME> --contract <CONSUMER_ADDRESS> --subid <SUBSCRIPTION_ID>
+``` 
 
 You will see a confirmation request, so hit `Y` and press enter. 
 
@@ -79,5 +83,6 @@ Once the request is fulfilled the console will show the response (decoded into t
 
 ### 6. Make Queries
 You are also able to query the response that was stored in your Functions Consumer contract either through the [Functions UI](https://functions.chain.link/) or programmatically as follows: <br/>
-`npx hardhat func-read --contract <CONSUMER_ADDRESS> --network <NETWORK_NAME>`
-<br/>
+```
+npx hardhat func-read --contract <CONSUMER_ADDRESS> --network <NETWORK_NAME>
+```

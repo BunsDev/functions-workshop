@@ -8,15 +8,11 @@
   "scripts": {
     "set:pw": "npx env-enc set-pw",
     "set:env": "npx env-enc set",
-    "compile": "hardhat compile",
-    "build": "forge build",
-    "deploy": "forge script scripts/FunctionsConsumer.s.sol:FunctionsConsumerScript --rpc-url https://sepolia.drpc.org --broadcast",
-    "deploy:hh": "npx hardhat func-deploy-client --network ethereumSepolia --verify false",
-    "test": "forge test -vv",
     "simulate": "node scripts/Simulate.js",
-    "subscribe": "npx hardhat func-sub-create --network ethereumSepolia --amount 5 --contract 0x48adead8e90c4b6B0b9b9E1D8f96bA81155D0c2F",
-    "request": "npx hardhat func-request --network ethereumSepolia --contract 0x48adead8e90c4b6B0b9b9E1D8f96bA81155D0c2F --subid 2406",
-    "read": "npx hardhat func-read --contract 0x48adead8e90c4b6B0b9b9E1D8f96bA81155D0c2F --network ethereumSepolia"
+    "deploy": "npx hardhat func-deploy-consumer --network ethereumSepolia --verify true",
+    "subscribe": "npx hardhat func-sub-create --network ethereumSepolia --amount 5 --contract 0x6Bba94D2DDfd897D565bDEE41a09e9db14f87180",
+    "request": "npx hardhat func-request --network ethereumSepolia --contract 0x6Bba94D2DDfd897D565bDEE41a09e9db14f87180 --subid 2444",
+    "read": "npx hardhat func-read --network ethereumSepolia --contract 0x6Bba94D2DDfd897D565bDEE41a09e9db14f87180"
   },
   "dependencies": {
     "@chainlink/contracts": "^1.1.0",
