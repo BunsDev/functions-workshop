@@ -15,6 +15,11 @@ Chainlink is able to execute a user-defined function via a DON, which comes to c
 
 ## Functions Workflow
 
+### 0. Install Dependencies
+```
+yarn
+```
+
 ### 1. Setup Environment Variables
 
 #### Create Password
