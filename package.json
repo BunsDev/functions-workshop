@@ -10,7 +10,7 @@
     "set:env": "npx env-enc set",
     "simulate": "node scripts/Simulate.js",
     "deploy": "npx hardhat func-deploy-consumer --network ethereumSepolia --verify true",
-    "subscribe": "npx hardhat func-sub-create --network ethereumSepolia --amount 5 --contract 0x6Bba94D2DDfd897D565bDEE41a09e9db14f87180",
+    "subscribe": "npx hardhat func-sub-create --network ethereumSepolia --amount 0 --contract 0x6Bba94D2DDfd897D565bDEE41a09e9db14f87180",
     "request": "npx hardhat func-request --network ethereumSepolia --contract 0x6Bba94D2DDfd897D565bDEE41a09e9db14f87180 --subid 2444",
     "read": "npx hardhat func-read --network ethereumSepolia --contract 0x6Bba94D2DDfd897D565bDEE41a09e9db14f87180"
   },
