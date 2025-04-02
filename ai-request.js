@@ -26,14 +26,12 @@ const priceRequest = await Functions.makeHttpRequest({
 // executes: request then waits for the sorted response.
 const priceResponse = await priceRequest.data.data.sort(
     // sorts: time (descending) to get the most recent prices.
-    function(a, b) {
-        return b.time - a.time
-    }
+    (a, b) => b.time - a.time
 )
 
 // [3] RESPONSE HANDLING //
 
-let prices = []
+const prices = []
 
 // gets: historical prices from the response
 for (let i=0; i<Number(HISTORICAL_DAYS); i++) {
@@ -52,7 +50,7 @@ No explanation. Only report a float number with no dollar sign and no context.`
 // requests: OpenAI API using Functions
 const openAIRequest = await Functions.makeHttpRequest({
     // url: URL of the API endpoint (required)
-    url: `https://api.openai.com/v1/chat/completions`,
+    url: "https://api.openai.com/v1/chat/completions",
     // defaults to 'GET' (optional)
     method: "POST", 
     // headers: supplied as an object (optional)
